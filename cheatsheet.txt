@@ -1,0 +1,34 @@
+## keybinds
+
+Open cheatsheet                    | <leader>cs
+
+Open file browser pane             | Alt-1
+Open errors and warnings pane      | Alt-2
+
+Open code actions                  | Alt-Enter
+
+Close telescope                    | Ctrl-Q
+Close any pane                     | q (in normal mode)
+
+Open todos                         | <leader>st
+
+Align lines in a column by = sign  | <leader>tt (normal and visual modes)
+Align lines in a column first word | <leader>tt (normal and visual modes)
+
+View recent projects               | <leader>sp
+
+Open a new tab                     | <leader>ot
+
+Go back to normal in terminal      | <C-\><C-N>
+
+## telescope
+
+Next item                          | Ctrl-N
+Previous item                      | Ctrl-P
+
+## memos
+
+Apply current file as config       | :so
+
+Leave only the current open tab    | :tabonly
+
