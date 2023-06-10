@@ -54,7 +54,6 @@ vim.keymap.set({ 'n', 'v' }, '<leader>ts', ':Tabularize /\zs<cr>',
   { desc = '[T]abularize by first [S]pace signs', silent = true, noremap = true })
 
 -- TODO: add binds for managing multiple windows and tabs
--- switch tabs
 vim.keymap.set('n', '<C-Tab>', ':tabn<cr>',
   { desc = 'Next tab', silent = true, noremap = true })
 vim.keymap.set('n', '<C-S-Tab>', ':tabp<cr>',
