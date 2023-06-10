@@ -1,51 +1,34 @@
 -- nvim-tree configs
-local lib = require("nvim-tree.lib")
-local view = require("nvim-tree.view")
-
-local function collapse_all()
-  require("nvim-tree.actions.tree-modifiers.collapse-all").fn()
-end
-
-local function expand_all()
-  require("nvim-tree.actions.tree-modifiers.expand-all").fn()
-end
-
-local function edit_or_open()
-  -- open as vsplit on current node
-  local action = "edit"
-  local node = lib.get_node_at_cursor()
-
-  if node == nil then
-    return
+local function tree_on_attach(bufnr)
+  local api = require "nvim-tree.api"
+  local function opts(desc)
+    return {
+      desc = "nvim-tree: " .. desc,
+      buffer = bufnr,
+      noremap = true,
+      silent = true,
+      nowait = true
+    }
   end
 
-  -- Just copy what's done normally with vsplit
-  if node.link_to and not node.nodes then
-    require('nvim-tree.actions.node.open-file').fn(action, node.link_to)
-    view.close() -- Close the tree if file was opened
+  -- default mappings
+  api.config.mappings.default_on_attach(bufnr)
 
-  elseif node.nodes ~= nil then
-    lib.expand_or_collapse(node)
-
-  else
-    require('nvim-tree.actions.node.open-file').fn(action, node.absolute_path)
-    view.close() -- Close the tree if file was opened
-  end
+  vim.keymap.set('n', '-', api.tree.change_root_to_parent, opts('Up'))
+  vim.keymap.set('n', '<Tab>', api.node.open.preview, opts('Open Preview'))
+  vim.keymap.set('n', 'a', api.fs.create, opts('Create'))
+  vim.keymap.set('n', 'L', api.node.open.tab, opts("Open in new tab"))
+  vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
+  vim.keymap.set('n', 'l', api.node.open.edit, opts("Open in current buffer"))
+  vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts("Close node"))
+  vim.keymap.set('n', 'H', api.tree.collapse_all, opts("Collapse all"))
 end
 
 require('nvim-tree').setup({
   view = {
-    mappings = {
-      custom_only = false,
-      list = {
-        { key = "l", action = "edit", action_cb = edit_or_open },
-        { key = "L", action = "expand_all", action_cb = expand_all },
-        { key = "h", action = "close_node" },
-        { key = "H", action = "collapse_all", action_cb = collapse_all }
-      }
-    },
     width = 45
   },
+  on_attach = tree_on_attach,
   actions = {
     open_file = {
       quit_on_open = true
