@@ -13,7 +13,7 @@ Close any pane                     | q (in normal mode)
 Open todos                         | <leader>st
 
 Align lines in a column by = sign  | <leader>tt (normal and visual modes)
-Align lines in a column first word | <leader>tt (normal and visual modes)
+Align lines in a column first word | <leader>ts (normal and visual modes)
 
 View recent projects               | <leader>sp
 
