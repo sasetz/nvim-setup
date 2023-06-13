@@ -35,7 +35,7 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sp', require('telescope').extensions.projects.projects, { desc = '[S]earch [P]rojects' })
+vim.keymap.set('n', '<leader>ss', require('telescope').extensions.persisted.persisted, { desc = '[S]earch [S]essions' })
 vim.keymap.set('n', '<leader>st', ':TodoTelescope<cr>', { desc = '[S]earch [T]odo' })
 
 -- display errors under cursor
@@ -54,9 +54,9 @@ vim.keymap.set({ 'n', 'v' }, '<leader>ts', ':Tabularize /\zs<cr>',
   { desc = '[T]abularize by first [S]pace signs', silent = true, noremap = true })
 
 -- TODO: add binds for managing multiple windows and tabs
-vim.keymap.set('n', '<C-Tab>', ':tabn<cr>',
+vim.keymap.set('n', '<S-l>', ':tabn<cr>',
   { desc = 'Next tab', silent = true, noremap = true })
-vim.keymap.set('n', '<C-S-Tab>', ':tabp<cr>',
+vim.keymap.set('n', '<S-h>', ':tabp<cr>',
   { desc = 'Previous tab', silent = true, noremap = true })
 
 -- open tab

@@ -44,5 +44,6 @@ end
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
-pcall(require('telescope').load_extension, 'projects')
+pcall(require('telescope').load_extension, 'persisted')
+-- pcall(require('telescope').load_extension, 'projects')
 

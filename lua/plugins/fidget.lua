@@ -1,7 +1,8 @@
 -- Turn on lsp status information
 require('fidget').setup{
   text = {
-    spinner = {"▙", "▟", "▜", "▛"},
+    -- spinner = {"▙", "▟", "▜", "▛"},
+    spinner = 'dots',
     done = ''
   },
   timer = {

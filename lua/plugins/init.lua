@@ -28,7 +28,10 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
 
       -- spinner and status for lsp
-      'j-hui/fidget.nvim',
+      {
+        'j-hui/fidget.nvim',
+        tag = "legacy",
+      },
 
       -- additional lua configuration and docs
       'folke/neodev.nvim',
@@ -37,8 +40,11 @@ require('lazy').setup({
 
   -- autocompletion
   {
-    'hrsh7th/nvim-cmp',
-    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', 'rafamadriz/friendly-snippets' },
+    'ms-jpq/coq_nvim',
+    branch = 'coq',
+    dependencies = {
+      'ms-jpq/coq.artifacts'
+    }
   },
 
   -- highlighting, navigation, syntax overall
@@ -164,23 +170,24 @@ require('lazy').setup({
   -- reformat lines so that they align by some char
   { 'godlygeek/tabular' },
 
+  {
+    'ibhagwan/fzf-lua',
+    event = 'VeryLazy',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('fzf-lua').setup({'telescope'})
+    end
+  },
+
   -- add sessions, restores layout for each project
   {
-    'rmagatti/auto-session',
-    config = function()
-      require("auto-session").setup {
-        log_level = "error",
-        auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
-      }
-    end
+      'olimorris/persisted.nvim',
+      config = true
   },
 
   -- work with projects rather than folders
   {
-    "ahmedkhalf/project.nvim",
-    config = function()
-      require("project_nvim").setup {}
-    end
+    'Abstract-IDE/penvim',
   },
 
   -- plugin for displaying layout

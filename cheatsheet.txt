@@ -21,6 +21,11 @@ Open a new tab                     | <leader>ot
 
 Go back to normal in terminal      | <C-\><C-N>
 
+Open session list                  | <leader>ss
+
+Next tab                           | <S-l>
+Previous tab                       | <S-h>
+
 ## telescope
 
 Next item                          | Ctrl-N

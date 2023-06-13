@@ -1,3 +1,4 @@
 require('cheatsheet').setup {
-  -- config here
+  bundled_cheatsheets = false,
+  bundled_plugin_cheatsheets = false,
 }
