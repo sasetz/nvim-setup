@@ -199,6 +199,13 @@ require('lazy').setup({
   {
     'ranjithshegde/ccls.nvim'
   },
+
+  {
+    'ThePrimeagen/harpoon',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+  }
 })
 
 -- load the configurations
