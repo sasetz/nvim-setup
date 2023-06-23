@@ -52,7 +52,7 @@ local on_attach = function(_, bufnr)
   end
 
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<M-CR>', vim.lsp.buf.code_action, 'Code Action')
+  nmap('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -104,18 +104,18 @@ mason_lspconfig.setup_handlers {
 }
 
 -- code for ccls language server
-local util = require 'lspconfig.util'
-local server_config = {
-    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'opencl' },
-    root_dir = function(fname)
-        return util.root_pattern('compile_commands.json', 'compile_flags.txt', '.git')(fname)
-            or util.find_git_ancestor(fname)
-    end,
-    init_options = { cache = {
-        directory = vim.fs.normalize '~/.cache/ccls',
-    } },
-    on_attach = on_attach,
-    --capabilities = my_caps_table_or_func
-}
-require("ccls").setup { lsp = { lspconfig = server_config } }
+-- local util = require 'lspconfig.util'
+-- local server_config = {
+--     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'opencl' },
+--     root_dir = function(fname)
+--         return util.root_pattern('compile_commands.json', 'compile_flags.txt', '.git')(fname)
+--             or util.find_git_ancestor(fname)
+--     end,
+--     init_options = { cache = {
+--         directory = vim.fs.normalize '~/.cache/ccls',
+--     } },
+--     on_attach = on_attach,
+--     --capabilities = my_caps_table_or_func
+-- }
+-- require("ccls").setup { lsp = { lspconfig = server_config } }
 

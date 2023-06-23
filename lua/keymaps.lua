@@ -37,6 +37,7 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>ss', require('telescope').extensions.persisted.persisted, { desc = '[S]earch [S]essions' })
 vim.keymap.set('n', '<leader>st', ':TodoTelescope<cr>', { desc = '[S]earch [T]odo' })
+vim.keymap.set('n', '<leader>sk', ':Telescope keymaps<cr>', { desc = '[S]earch [K]eymaps' })
 
 -- display errors under cursor
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Diagnostics: Previous' })
@@ -53,11 +54,22 @@ vim.keymap.set({ 'n', 'v' }, '<leader>tt', ':Tabularize /=<cr>',
 vim.keymap.set({ 'n', 'v' }, '<leader>ts', ':Tabularize /\zs<cr>',
   { desc = '[T]abularize by first [S]pace signs', silent = true, noremap = true })
 
--- TODO: add binds for managing multiple windows and tabs
 vim.keymap.set('n', '<S-l>', ':tabn<cr>',
   { desc = 'Next tab', silent = true, noremap = true })
 vim.keymap.set('n', '<S-h>', ':tabp<cr>',
   { desc = 'Previous tab', silent = true, noremap = true })
+vim.keymap.set('n', '<C-h>', '<C-w>h',
+  { desc = 'Left window', silent = true })
+vim.keymap.set('n', '<C-l>', '<C-w>l',
+  { desc = 'Right window', silent = true, noremap = true })
+vim.keymap.set('n', '<C-j>', '<C-w>j',
+  { desc = 'Bottom window', silent = true, noremap = true })
+vim.keymap.set('n', '<C-k>', '<C-w>k',
+  { desc = 'Top window', silent = true, noremap = true })
+vim.keymap.set('n', '<leader>h', ':vsplit<cr>',
+  { desc = 'Horizontal split', silent = true, noremap = true })
+vim.keymap.set('n', '<leader>v', ':split<cr>',
+  { desc = 'Vertical split', silent = true, noremap = true })
 
 -- open tab
 vim.keymap.set('n', '<leader>ot', ':tab split<cr>',
@@ -79,6 +91,9 @@ vim.keymap.set('n', '<M-3>', ':AerialToggle<cr>',
 -- TODO: add tasks pane
 -- 4. open tasks pane
 
--- TODO: add binds for moving lines up and down
+vim.keymap.set('n', '<C-e>', '3<C-e>',
+  { desc = 'Move down', silent = true, noremap = true })
+vim.keymap.set('n', '<C-y>', '3<C-y>',
+  { desc = 'Move up', silent = true, noremap = true })
 
 -- vim: ts=2 sts=2 sw=2 et

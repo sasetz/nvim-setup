@@ -22,6 +22,7 @@ Open a new tab                     | <leader>ot
 Go back to normal in terminal      | <C-\><C-N>
 
 Open session list                  | <leader>ss
+Open keymap list                   | <leader>sk
 
 Next tab                           | <S-l>
 Previous tab                       | <S-h>
@@ -36,4 +37,6 @@ Previous item                      | Ctrl-P
 Apply current file as config       | :so
 
 Leave only the current open tab    | :tabonly
+
+Edit cheatsheet                    | :CheatsheetEdit
 

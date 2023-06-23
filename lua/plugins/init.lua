@@ -195,11 +195,6 @@ require('lazy').setup({
     'stevearc/aerial.nvim',
   },
 
-  -- C/CPP lsp
-  {
-    'ranjithshegde/ccls.nvim'
-  },
-
   {
     'ThePrimeagen/harpoon',
     dependencies = {
