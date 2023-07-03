@@ -30,7 +30,7 @@ require('lazy').setup({
       -- spinner and status for lsp
       {
         'j-hui/fidget.nvim',
-        tag = "legacy",
+        tag = 'legacy',
       },
 
       -- additional lua configuration and docs
@@ -40,11 +40,15 @@ require('lazy').setup({
 
   -- autocompletion
   {
-    'ms-jpq/coq_nvim',
-    branch = 'coq',
+    'hrsh7th/nvim-cmp',
     dependencies = {
-      'ms-jpq/coq.artifacts'
-    }
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-vsnip',
+      'hrsh7th/vim-vsnip',
+      'rafamadriz/friendly-snippets',
+      'onsails/lspkind.nvim',
+    },
   },
 
   -- highlighting, navigation, syntax overall
@@ -53,6 +57,7 @@ require('lazy').setup({
     build = function()
       pcall(require('nvim-treesitter.install').update { with_sync = true })
     end,
+    version = nil,
   },
 
   -- additional text objects for treesitter
