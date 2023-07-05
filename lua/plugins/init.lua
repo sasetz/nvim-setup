@@ -94,8 +94,6 @@ require('lazy').setup({
     'windwp/nvim-autopairs',
     config = function() require('nvim-autopairs').setup {} end
   },
-  -- comments action
-  'numToStr/Comment.nvim',
   -- autodetect tab width
   'tpope/vim-sleuth',
 
@@ -213,6 +211,17 @@ require('lazy').setup({
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
+  },
+
+  -- a lot of helpful plugins in one
+  {
+    'echasnovski/mini.nvim',
+    version = false,
+  },
+
+  -- highlight word under cursor
+  {
+    'RRethy/vim-illuminate',
   }
 })
 
