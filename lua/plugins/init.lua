@@ -60,6 +60,14 @@ require('lazy').setup({
     version = nil,
   },
 
+  -- showing context
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-context',
+    },
+  },
+
   -- additional text objects for treesitter
   {
     'nvim-treesitter/nvim-treesitter-textobjects',

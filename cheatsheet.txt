@@ -1,14 +1,13 @@
-## keybinds
+## keymaps
 
 Open cheatsheet                    | <leader>cs
 
 Open file browser pane             | Alt-1
 Open errors and warnings pane      | Alt-2
 
-Open code actions                  | Alt-Enter
+Open code actions                  | <leader>ca
 
-Close telescope                    | Ctrl-Q
-Close any pane                     | q (in normal mode)
+Close any pane                     | Ctrl-Q (in normal mode)
 
 Open todos                         | <leader>st
 
@@ -24,13 +23,21 @@ Go back to normal in terminal      | <C-\><C-N>
 Open session list                  | <leader>ss
 Open keymap list                   | <leader>sk
 
-Next tab                           | <S-l>
-Previous tab                       | <S-h>
+Next tab                           | Ctrl-L
+Previous tab                       | Ctrl-H
+
+Split window horizontally          | <leader>h
+Split window vertically            | <leader>v
+
+Move between windows               | Shift-<move-key>
 
 ## telescope
 
 Next item                          | Ctrl-N
 Previous item                      | Ctrl-P
+
+Delete item                        | Ctrl-D
+Close telescope                    | Ctrl-Q
 
 ## memos
 

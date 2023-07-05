@@ -54,21 +54,21 @@ vim.keymap.set({ 'n', 'v' }, '<leader>tt', ':Tabularize /=<cr>',
 vim.keymap.set({ 'n', 'v' }, '<leader>ts', ':Tabularize /\zs<cr>',
   { desc = '[T]abularize by first [S]pace signs', silent = true, noremap = true })
 
-vim.keymap.set('n', '<S-l>', ':tabn<cr>',
+vim.keymap.set('n', '<C-l>', ':tabn<cr>',
   { desc = 'Next tab', silent = true, noremap = true })
-vim.keymap.set('n', '<S-h>', ':tabp<cr>',
+vim.keymap.set('n', '<C-h>', ':tabp<cr>',
   { desc = 'Previous tab', silent = true, noremap = true })
-vim.keymap.set('n', '<C-h>', '<C-w>h',
+vim.keymap.set('n', '<S-h>', '<C-w>h',
   { desc = 'Left window', silent = true })
-vim.keymap.set('n', '<C-l>', '<C-w>l',
+vim.keymap.set('n', '<S-l>', '<C-w>l',
   { desc = 'Right window', silent = true, noremap = true })
-vim.keymap.set('n', '<C-j>', '<C-w>j',
+vim.keymap.set('n', '<S-j>', '<C-w>j',
   { desc = 'Bottom window', silent = true, noremap = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k',
   { desc = 'Top window', silent = true, noremap = true })
-vim.keymap.set('n', '<leader>h', ':vsplit<cr>',
+vim.keymap.set('n', '<leader>h', ':split<cr>',
   { desc = 'Horizontal split', silent = true, noremap = true })
-vim.keymap.set('n', '<leader>v', ':split<cr>',
+vim.keymap.set('n', '<leader>v', ':vsplit<cr>',
   { desc = 'Vertical split', silent = true, noremap = true })
 
 -- open tab
