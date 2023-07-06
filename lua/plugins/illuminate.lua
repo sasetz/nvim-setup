@@ -13,7 +13,7 @@ require('illuminate').configure {
   },
 }
 
-local bg = '#30323f'
+local bg = '#424557'
 vim.cmd([[hi IlluminatedWordText gui=none guibg=]] .. bg)
 vim.cmd([[hi IlluminatedWordRead gui=none guibg=]] .. bg)
 vim.cmd([[hi IlluminatedWordWrite gui=none guibg=]] .. bg)
