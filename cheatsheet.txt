@@ -31,6 +31,9 @@ Split window vertically            | <leader>v
 
 Move between windows               | Shift-<move-key>
 
+Open a fold                        | zo
+Close a fold                       | zc
+
 ## mini.bracketed
 
 Next buffer                        | [B [b ]b ]B
