@@ -24,4 +24,6 @@ require('mini.comment').setup()
 -- autocompletion
 -- require('mini.completion').setup()
 
+-- automatically add pair brackets
+require('mini.pairs').setup()
 
