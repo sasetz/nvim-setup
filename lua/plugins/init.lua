@@ -89,11 +89,6 @@ require('lazy').setup({
 
   -- indent even on blank lines
   'lukas-reineke/indent-blankline.nvim',
-  -- automatically add pair brackets
-  {
-    'windwp/nvim-autopairs',
-    config = function() require('nvim-autopairs').setup {} end
-  },
   -- autodetect tab width
   'tpope/vim-sleuth',
 
