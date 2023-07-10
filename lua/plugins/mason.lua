@@ -10,10 +10,11 @@
 --  up that documentation yourself.
 
 -- TODO: restrict the size of the hint window
--- TODO: add keybinds to scroll in the hint window
 -- TODO: add keybinds for reformatting the file
 -- TODO: add option to put the arguments of a call to separate lines
 local servers = {
+  lua_ls = {},
+  rust_analyzer = {},
 }
 
 -- Setup neovim lua configuration
@@ -28,80 +29,92 @@ require('neodev').setup()
 require('mason').setup()
 
 -- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
+local mason_lspconfig = require('mason-lspconfig')
 
 mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
--- LSP keymaps
-local on_attach = function(_, bufnr)
-  -- NOTE: Remember that lua is a real programming language, and as such it is
-  -- possible to define small helper and utility functions so you don't have to
-  -- repeat yourself many times.
-  --
-  -- In this case, we create a function that lets us more easily define
-  -- mappings specific for LSP related items. It sets the mode, buffer and
-  -- description for us each time.
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
+-- function that takes an lsp as a table that contains some special properties
+-- and bakes it into the function itself
+-- it returns a function that refers to the custom lsp, but doesn't take any
+-- more arguments
+local bake_on_attach = function (lsp)
+  -- LSP keymaps
+  local raw_on_attach = function(_, bufnr)
+    -- In this case, we create a function that lets us more easily define
+    -- mappings specific for LSP related items. It sets the mode, buffer and
+    -- description for us each time.
+    local nmap = function(keys, func, desc)
+      if desc then
+        desc = 'LSP: ' .. desc
+      end
+
+      vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
     end
 
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+    nmap('<leader>rn', lsp.rename, '[R]e[n]ame')
+    nmap('<leader>ca', lsp.code_action, 'Code Action')
+
+    nmap('gd', lsp.definition, '[G]oto [D]efinition')
+    nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+    nmap('gI', lsp.implementation, '[G]oto [I]mplementation')
+    nmap('<leader>D', lsp.type_definition, 'Type [D]efinition')
+    nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols,
+      '[D]ocument [S]ymbols')
+
+    nmap(
+      '<leader>ws',
+      require('telescope.builtin').lsp_dynamic_workspace_symbols,
+      '[W]orkspace [S]ymbols'
+    )
+
+    -- See `:help K` for why this keymap
+    nmap('K', lsp.hover, 'Hover Documentation')
+    nmap('<C-k>', lsp.signature_help, 'Signature Documentation')
+
+    -- Lesser used LSP functionality
+    nmap('gD', lsp.declaration, '[G]oto [D]eclaration')
+    nmap(
+      '<leader>wa',
+      lsp.add_workspace_folder,
+      '[W]orkspace [A]dd Folder'
+    )
+    nmap(
+      '<leader>wr',
+      lsp.remove_workspace_folder,
+      '[W]orkspace [R]emove Folder'
+    )
+    nmap('<leader>wl', function()
+      print(vim.inspect(lsp.list_workspace_folders()))
+    end, '[W]orkspace [L]ist Folders')
+
+    -- Create a command `:Format` local to the LSP buffer
+    vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+      lsp.format()
+    end, { desc = 'Format current buffer with LSP' })
   end
-
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
-
-  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-  nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols,
-    '[D]ocument [S]ymbols')
-
-  nmap(
-    '<leader>ws',
-    require('telescope.builtin').lsp_dynamic_workspace_symbols,
-    '[W]orkspace [S]ymbols'
-  )
-
-  -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
-
-  -- Lesser used LSP functionality
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap(
-    '<leader>wa',
-    vim.lsp.buf.add_workspace_folder,
-    '[W]orkspace [A]dd Folder'
-  )
-  nmap(
-    '<leader>wr',
-    vim.lsp.buf.remove_workspace_folder,
-    '[W]orkspace [R]emove Folder'
-  )
-  nmap('<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
-
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
+  return raw_on_attach
 end
+
 
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
       capabilities = capabilities,
-      on_attach = on_attach,
+      on_attach = bake_on_attach(vim.lsp.buf),
       settings = servers[server_name],
     }
   end,
 }
+
+local rt = require("rust-tools")
+
+rt.setup({
+  server = {
+    on_attach = bake_on_attach(rt),
+  },
+})
 
 -- code for ccls language server
 -- local util = require 'lspconfig.util'

@@ -212,12 +212,20 @@ require('lazy').setup({
   {
     'echasnovski/mini.nvim',
     version = false,
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
   },
 
   -- highlight word under cursor
   {
     'RRethy/vim-illuminate',
-  }
+  },
+
+  -- rust additions
+  {
+    'simrat39/rust-tools.nvim',
+  },
 })
 
 -- load the configurations
