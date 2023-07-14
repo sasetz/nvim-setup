@@ -50,4 +50,7 @@ vim.o.completeopt = 'menuone,noselect'
 -- set amount of undos held in memory
 vim.o.undolevels = 5000
 
+-- always show tabline
+vim.o.showtabline = 2
+
 -- vim: ts=2 sts=2 sw=2 et

@@ -54,9 +54,9 @@ vim.keymap.set({ 'n', 'v' }, '<leader>tt', ':Tabularize /=<cr>',
 vim.keymap.set({ 'n', 'v' }, '<leader>ts', ':Tabularize /\zs<cr>',
   { desc = '[T]abularize by first [S]pace signs', silent = true, noremap = true })
 
-vim.keymap.set('n', '<C-l>', ':tabn<cr>',
+vim.keymap.set('n', '<C-l>', ':BufferNext<cr>',
   { desc = 'Next tab', silent = true, noremap = true })
-vim.keymap.set('n', '<C-h>', ':tabp<cr>',
+vim.keymap.set('n', '<C-h>', ':BufferPrevious<cr>',
   { desc = 'Previous tab', silent = true, noremap = true })
 vim.keymap.set('n', '<S-h>', '<C-w>h',
   { desc = 'Left window', silent = true })
@@ -71,9 +71,9 @@ vim.keymap.set('n', '<leader>h', ':split<cr>',
 vim.keymap.set('n', '<leader>v', ':vsplit<cr>',
   { desc = 'Vertical split', silent = true, noremap = true })
 
--- open tab
-vim.keymap.set('n', '<leader>ot', ':tab split<cr>',
-  { desc = '[O]pen new [T]ab', silent = true, noremap = true })
+-- close tab
+vim.keymap.set('n', '<leader>pp', ':BufferClose<cr>',
+  { desc = 'Close current buffer', silent = true, noremap = true })
 
 -- [[ PANELS AND USEFUL STUFF ]]
 
@@ -88,12 +88,13 @@ vim.keymap.set('n', '<M-2>', ':TroubleToggle<cr>',
 -- 3. open layout pane
 vim.keymap.set('n', '<M-3>', ':AerialToggle<cr>',
   { desc = 'Open layout pane', silent = true, noremap = true })
--- TODO: add tasks pane
--- 4. open tasks pane
 
 vim.keymap.set('n', '<C-e>', '3<C-e>',
   { desc = 'Move down', silent = true, noremap = true })
 vim.keymap.set('n', '<C-y>', '3<C-y>',
+  { desc = 'Move up', silent = true, noremap = true })
+
+vim.keymap.set('n', '<leader>f', MiniFiles.open,
   { desc = 'Move up', silent = true, noremap = true })
 
 -- vim: ts=2 sts=2 sw=2 et

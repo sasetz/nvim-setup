@@ -27,3 +27,9 @@ require('mini.comment').setup()
 -- automatically add pair brackets
 require('mini.pairs').setup()
 
+-- file browser
+require('mini.files').setup()
+
+-- map of the file in top right corner
+require('mini.map').setup()
+
