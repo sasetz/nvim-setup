@@ -5,4 +5,14 @@ require('indent_blankline').setup {
   char = '│',
   show_trailing_blankline_indent = false,
 }
+vim.g.indent_blankline_filetype_exclude = {
+  'lspinfo',
+  'packer',
+  'checkhealth',
+  'help',
+  'man',
+  '',
+  'aerial',
+  'dashboard',
+}
 

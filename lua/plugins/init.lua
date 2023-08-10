@@ -240,6 +240,11 @@ require('lazy').setup({
     },
     version = '^1.0.0',
   },
+
+  -- LSP for C/C++
+  {
+    'ranjithshegde/ccls.nvim',
+  },
 })
 
 -- load the configurations

@@ -97,6 +97,8 @@ local bake_on_attach = function (lsp)
   return raw_on_attach
 end
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 mason_lspconfig.setup_handlers {
   function(server_name)
@@ -115,6 +117,66 @@ rt.setup({
     on_attach = bake_on_attach(rt),
   },
 })
+
+_G.ccls_cmd = '/usr/local/timostools/linux/ccls'
+_G.ccls_init_options= {}
+
+if vim.fn.getcwd():find('panos') then
+    _G.ccls_init_options = {
+      index = {
+          blacklist = {
+              "./mgmt_core/build-tools/cython-0.28.x/.",
+              "./bcm/.*",
+              "./bcm_.*",
+              "./build/ptr/.*",
+            },
+          initialBlacklist = {
+              "./mgmt_core/build-tools/cython-0.28.x/.",
+              "./bcm/.*",
+              "./bcm_.*",
+              "./build/ptr/.*",
+            },
+          initialWhitelist = {
+              "./gmi/.",
+              "./mgmt_core/.",
+              "./mgmt_agent/.",
+              "./mgmt_schema/.",
+              "./mci/."
+            },
+          whitelist = {
+              "./gmi/.",
+              "./mgmt_core/.",
+              "./mgmt_agent/.",
+              "./mgmt_schema/.",
+              "./mci/."
+            },
+        }
+    }
+end
+
+local lspconfig = require('lspconfig')
+local ccls_init_opts_local = (_G.ccls_init_options ~= nil) and _G.ccls_init_options or {}
+local ccls_init_opts = vim.tbl_deep_extend("force", ccls_init_opts_local, {
+  cache = {
+    directory = vim.fn.expand("$HOME/.ccls-cache"),
+  },
+  client = {
+    snippet_support = true,
+    placeholder = false,
+  },
+  index = { on_change = true },
+  highlight = { ls_ranges = true },
+})
+
+-- lspconfig.ccls.setup {
+--   capabilities = capabilities,
+--   filetypes = { "c", "cpp", "cuda", "objc", "objcpp", },
+--   rootPatterns = { "compile_commands.json", ".ccls-root", ".ccls", ".git" },
+--   ls_ranges = true,
+--   init_options = ccls_init_opts,
+--   cmd = { _G.ccls_cmd or "ccls" },
+--   on_attach = bake_on_attach(vim.lsp.buf),
+-- }
 
 -- code for ccls language server
 -- local util = require 'lspconfig.util'
